@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookstore.API", "Bookstore.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "..\Persistence\Persistence.csproj", "{02E12F2F-5EE2-4F52-B3C9-B2C771A1154D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_Persistence", "..\Associated\Persistence\_Persistence.csproj", "{50E0853A-38C2-459F-AA8C-E52B821EDB28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_Persistence", "..\Associated\Persistence\_Persistence.csproj", "{50E0853A-38C2-459F-AA8C-E52B821EDB28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_Application", "..\Associated\Application\_Application.csproj", "{83B66032-7C5B-4F31-920A-27B47465692C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_Application", "..\Associated\Application\_Application.csproj", "{83B66032-7C5B-4F31-920A-27B47465692C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\Application\Application.csproj", "{24B77E1D-865E-4A36-85D7-06F13FBE585D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{83B66032-7C5B-4F31-920A-27B47465692C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83B66032-7C5B-4F31-920A-27B47465692C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83B66032-7C5B-4F31-920A-27B47465692C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24B77E1D-865E-4A36-85D7-06F13FBE585D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24B77E1D-865E-4A36-85D7-06F13FBE585D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24B77E1D-865E-4A36-85D7-06F13FBE585D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24B77E1D-865E-4A36-85D7-06F13FBE585D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

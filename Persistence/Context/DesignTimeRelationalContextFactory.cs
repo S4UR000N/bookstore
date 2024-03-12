@@ -6,11 +6,11 @@ using Associated.Persistence.Factory;
 
 namespace Persistence.Context
 {
-    public class DesignTimeRelationalContextFactory : IDesignTimeDbContextFactory<RelationalContext>
+    public class DesignTimeRelationalContextFactory : IDesignTimeDbContextFactory<RelationalContext> 
     {
         public RelationalContext CreateDbContext(string[] args)
         {
-            System.Diagnostics.Debugger.Launch();
+            //System.Diagnostics.Debugger.Launch();
 
             return
                 WebApplication

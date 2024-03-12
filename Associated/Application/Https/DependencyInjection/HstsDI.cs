@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace Associated.Application.DependencyInjection
+namespace Associated.Application.Https.DependencyInjection
 {
     public static class HstsDI
     {

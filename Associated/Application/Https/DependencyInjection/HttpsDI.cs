@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using System.Net;
 
-namespace Associated.Application.DependencyInjection
+namespace Associated.Application.Https.DependencyInjection
 {
     public static class HttpsDI
     {

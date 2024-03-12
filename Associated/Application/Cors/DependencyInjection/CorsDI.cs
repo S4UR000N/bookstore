@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Associated.Application.DependencyInjection
+namespace Associated.Application.Cors.DependencyInjection
 {
     public static class CorsDI
     {
@@ -19,7 +19,7 @@ namespace Associated.Application.DependencyInjection
             {
                 options.AddPolicy(
                     "DefaultCorsPolicy",
-                    builder => builder.WithOrigins(allowedOrigins)
+                    builder => builder.WithOrigins(allowedOrigins!)
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials());
