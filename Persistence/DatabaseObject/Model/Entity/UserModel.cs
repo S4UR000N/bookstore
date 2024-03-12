@@ -9,7 +9,7 @@
         public string Password { get; set; }
         public long RoleId { get; set; } = 3;
         public RoleModel Role { get; set; }
-
+        public List<BookModel> Books { get; set; }
         public UserModel(string firstName, string lastName, string email, string password)
         {
             FirstName = firstName ?? string.Empty;

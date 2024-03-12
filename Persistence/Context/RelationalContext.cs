@@ -12,7 +12,8 @@ namespace Persistence.Context
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
 
-        public DbSet<UserModel> Users { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
+        public DbSet<UserModel> Users { get; set; }
+        public DbSet<BookModel> Books { get; set; }
     }
 }
