@@ -17,8 +17,7 @@ namespace Associated.Application.Cors.DependencyInjection
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy(
-                    "DefaultCorsPolicy",
+                options.AddPolicy("DefaultCorsPolicy",
                     builder => builder.WithOrigins(allowedOrigins!)
                         .AllowAnyMethod()
                         .AllowAnyHeader()

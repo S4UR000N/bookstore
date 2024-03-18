@@ -2,6 +2,7 @@
 using Application.User.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Persistence.DatabaseObject.Model.Entity;
 
@@ -80,6 +81,51 @@ namespace Bookstore.API.Controllers
                     await _relationalContext.SaveChangesAsync();
                 }
                 catch(Exception ex)
+                {
+                    return BadRequest();
+                }
+            }
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateBooksOnUser([FromBody] UpdateBooksOnUserRequestModel request)
+        {
+            if (!_userService.UserExists(request.UserId))
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = _relationalContext.Users
+                        .Include(user => user.Books)
+                        .FirstOrDefault(user => user.Id == request.UserId);
+
+                    foreach (var bookId in request.RemoveBooks)
+                    {
+                        var bookToRemove = user.Books.FirstOrDefault(b => b.Id == bookId);
+                        if (bookToRemove != null)
+                        {
+                            user.Books.Remove(bookToRemove);
+                        }
+                    }
+
+                    foreach (var bookId in request.AddBooks)
+                    {
+                        var bookToAdd = _relationalContext.Books.FirstOrDefault(b => b.Id == bookId);
+                        if (bookToAdd != null)
+                        {
+                            user.Books.Add(bookToAdd);
+                        }
+                    }
+
+                    _relationalContext.Users.Update(user);
+                    await _relationalContext.SaveChangesAsync();
+                }
+                catch (Exception ex)
                 {
                     return BadRequest();
                 }
