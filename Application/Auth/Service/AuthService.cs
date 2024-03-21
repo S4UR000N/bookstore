@@ -51,7 +51,7 @@ namespace Application.Auth.Service
                         new Claim(Claims.Id, user.Id.ToString()),
                         new Claim(Claims.FirstName, user.FirstName),
                         new Claim(Claims.LastName, user.LastName),
-                        new Claim(Claims.Role, user.Role.Name)
+                        new Claim(ClaimTypes.Role, user.Role.Name)
                     };
                     response.Result = _jwtService.GenerateToken(claims);
                     response.StatusCode = 200;

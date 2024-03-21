@@ -10,7 +10,6 @@ namespace Bookstore.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    [Authorize(Roles = "Admin")]
     public class UserController : ControllerBase
     {
         private UserService _userService;
@@ -24,6 +23,7 @@ namespace Bookstore.API.Controllers
 
         
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] CreateUserRequestModel request)
         {
             if (ModelState.IsValid)
@@ -35,6 +35,7 @@ namespace Bookstore.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Librarian")]
         public async Task<IActionResult> ReadMany()
         {
             var response = await _userService.ReadMany();
@@ -42,6 +43,7 @@ namespace Bookstore.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles="Admin, Librarian, Customer")]
         public async Task<IActionResult> ReadOneById(long? id)
         {
             if (id == null)
@@ -53,7 +55,35 @@ namespace Bookstore.API.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
+        [HttpGet("{id}")]
+        [Authorize(Roles = "Admin, Librarian")]
+        public async Task<IActionResult> ReadUserAndBooksById(long? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            var result = await _relationalContext.Books
+                .Include(b => b.Users.Where(u => u.Id == id))
+                .Select(b => new
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Description = b.Description,
+                    Author = b.Author,
+                    Year = b.Year,
+                    Users = new List<object> // Create a new list with only the user ID
+                    {
+                        new { Id = b.Users.Select(u => u.Id).FirstOrDefault() }
+                    }
+                })
+                .ToListAsync();
+            return Ok(result);
+        }
+
         [HttpPatch]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Patch([FromBody] PatchUserRoleRequestModel request)
         {
             if (ModelState.IsValid)
@@ -66,6 +96,7 @@ namespace Bookstore.API.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update([FromBody] UserModel request)
         {
             if (!_userService.UserExists(request.Id))
@@ -89,6 +120,7 @@ namespace Bookstore.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Librarian")]
         public async Task<IActionResult> UpdateBooksOnUser([FromBody] UpdateBooksOnUserRequestModel request)
         {
             if (!_userService.UserExists(request.UserId))
@@ -134,6 +166,7 @@ namespace Bookstore.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(long id)
         {
             var userModel = await _relationalContext.Users.FindAsync(id);

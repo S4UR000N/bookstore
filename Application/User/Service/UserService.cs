@@ -92,6 +92,7 @@ namespace Application.User.Service
             {
                 var user = _relationalContext.Users
                     .Include(u => u.Role)
+                    .Include(u => u.Books)
                     .FirstOrDefault(m => m.Id == id);
 
                 if (user == null)
